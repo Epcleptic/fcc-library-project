@@ -56,8 +56,11 @@ module.exports = function (app) {
       }
     })
 
-    .delete(function (req, res) {
+    .delete(async function (req, res) {
       //if successful response will be 'complete delete successful'
+      await Book.deleteMany({});
+      res.status(200);
+      res.send("complete delete successful");
     });
 
   app
