@@ -32,9 +32,12 @@ const Book = mongoose.model(
 module.exports = function (app) {
   app
     .route("/api/books")
-    .get(function (req, res) {
+    .get(async function (req, res) {
       //response will be array of book objects
       //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
+      const books = await Book.find({});
+      res.status(200);
+      res.json(books);
     })
 
     .post(async function (req, res) {
