@@ -191,11 +191,25 @@ suite("Functional Tests", function () {
 
     suite("DELETE /api/books/[id] => delete book object id", function () {
       test("Test DELETE /api/books/[id] with valid id in db", function (done) {
-        //done();
+        chai
+          .request(server)
+          .delete(`/api/books/${bookId}`)
+          .end(function (err, res) {
+            assert.equal(res.status, 200);
+            assert.equal(res.text, "delete successful");
+            done();
+          });
       });
 
       test("Test DELETE /api/books/[id] with  id not in db", function (done) {
-        //done();
+        chai
+          .request(server)
+          .delete(`/api/books/${invalidId}`)
+          .end(function (err, res) {
+            assert.equal(res.status, 404);
+            assert.equal(res.text, "no book exists");
+            done();
+          });
       });
     });
   });
